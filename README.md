@@ -119,29 +119,40 @@ Note that there might be several ways to complete the same task. However, a suit
 
     Create SQL statement to print all records from Bookings table for the following bookings dates using the BETWEEN operator: 2021-11-11, 2021-11-12 and 2021-11-13. The expected output result should be the same as shown in the following screenshot.
 
-![Task 1 output](images/task1output.PNG)
+SELECT * 
+FROM Bookings 
+WHERE BookingDate BETWEEN '2021-11-11' AND '2021-11-13';
+
+![Screenshot 2024-03-19 155939](https://github.com/Reyyadav/MY-SQL-DATABASE-PROJECT/assets/153619494/0a5b07e4-7f4b-4e14-b225-6ef1096e372a)
 
 **Task 2** : Create a JOIN query.
 
     Create a JOIN SQL statement on the Customers and Bookings tables. The statement must print the customers full names and related bookings IDs from the date 2021-11-11. The expected output result should be the same as that shown in the following screenshot:
 
+SELECT Customers.FullName, Bookings.BookingID 
+FROM Customers RIGHT JOIN Bookings 
+ON Customers.CustomerID = Bookings.CustomerID 
+WHERE BookingDate = '2021-11-11'; 
 
-![Task 2 output](images/task2output.PNG) 
+![Screenshot 2024-03-19 160106](https://github.com/Reyyadav/MY-SQL-DATABASE-PROJECT/assets/153619494/7489845b-7657-4b13-bfef-991026b3eb6c)
+
 
 **Task 3** : Create a GROUP BY query.
 
     Create a SQl statement to print the bookings dates from Bookings table. The statement must show the total number of bookings placed on each of the printed dates using the GROUP BY BookingDate. The expected output result should be the same as that shown in the following screenshot:
 
+SELECT BookingDate, COUNT(BookingDate) 
+FROM Bookings 
+GROUP BY BookingDate; 
 
-![Task 3 output](images/task3output.PNG) 
+![Screenshot 2024-03-19 160236](https://github.com/Reyyadav/MY-SQL-DATABASE-PROJECT/assets/153619494/f47da541-48dc-44f1-bda0-050c8cd44814)
 
 **Task 4** : Create a REPLACE statement.
 
     Create a SQL REPLACE statement that updates the cost of the Kabsa course from $17.00 to $20.00. 
     The expected output result should be the same as that shown in the following screenshot:
 
-
-![Task 4 output](images/task4output.PNG) 
+REPLACE INTO Courses (CourseName, Cost) VALUES ("Kabasa", 20.00);
 
 
 **Task 5** : Create constraints 
@@ -158,7 +169,13 @@ Note that there might be several ways to complete the same task. However, a suit
 
     The expected table structure should be the same as that shown in the following screenshot:
 
-![Task 5 output](images/task5output.PNG) 
+CREATE TABLE DeliveryAddress(     
+    ID INT PRIMARY KEY,     
+    Address VARCHAR(255) NOT NULL,     
+    Type VARCHAR(100) NOT NULL DEFAULT "Private",     
+    CustomerID INT NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
 
 
 **Task 6** : Alter table structure 
@@ -169,7 +186,7 @@ Note that there might be several ways to complete the same task. However, a suit
 
     Once the column has been added, the table's new structure should be the same as shown in the following screenshot:
 
-![Task 6 output](images/task6output.PNG) 
+ALTER TABLE Courses ADD COLUMN Ingredients VARCHAR(255);
 
 
 **Task 7** : Alter table structure 
@@ -178,7 +195,12 @@ Note that there might be several ways to complete the same task. However, a suit
 
     The expected output result of your query should be similar to the output in the following screenshot:
 
-![Task 7 output](images/task7output.PNG) 
+SELECT FullName 
+FROM Customers 
+WHERE (SELECT CustomerID FROM Bookings WHERE Customers.CustomerID = Bookings.CustomerID and BookingDate = "2021-11-11"); 
+
+![Screenshot 2024-03-19 160459](https://github.com/Reyyadav/MY-SQL-DATABASE-PROJECT/assets/153619494/71ee0ff8-742f-4a39-bf41-9d5535968e25)
+
 
 **Task 8** : Create a virtual table 
 
@@ -186,7 +208,7 @@ Note that there might be several ways to complete the same task. However, a suit
 
     Select all data from the BookingsView virtual table. The expected output result should be the same as shown in the following screenshot.
 
-![Task 8 output](images/task8output.PNG) 
+ CREATE VIEW BookingsView AS SELECT BookingID, BookingDate, NumberOfGuests FROM Bookings WHERE NumberOfGuests > 3 AND BookingDate < "2021-11-13";
 
 
 **Task 9** : Create a stored procedure 
@@ -195,8 +217,13 @@ Note that there might be several ways to complete the same task. However, a suit
  
     After executing the query, call the "GetBookingsData" with '2021-11-13' as the input date passed to the stored procedure to show all bookings made on that date. The expected output of the CALL statement should be the same as the following screenshot:
 
-![Task 9 output](images/task9output.PNG) 
+CREATE PROCEDURE GetBookingsData (InputDate DATE) 
+SELECT * 
+FROM Bookings 
+WHERE BookingDate = InputDate;
+CALL GetBookingsData ("2021-11-13");
 
+![Screenshot 2024-03-19 160629](https://github.com/Reyyadav/MY-SQL-DATABASE-PROJECT/assets/153619494/49a921de-1bf4-4856-9e1a-c3d5bfc639d2)
 
 **Task 10** : Use the String function
 
@@ -204,10 +231,11 @@ Note that there might be several ways to complete the same task. However, a suit
 
 
     ID: 10, Date: 2021-11-10, Number of guests: 5
+CALL GetBookingsData ("2021-11-13");
+
+![Screenshot 2024-03-19 160746](https://github.com/Reyyadav/MY-SQL-DATABASE-PROJECT/assets/153619494/56257114-d45e-4c52-9eae-6ea3bd99611c)
+    
 
 
-    The expected output result should be similar to the following screenshot (notice the table title "Booking Details")
-
-![Task 10 output](images/task10output.PNG) 
 
 

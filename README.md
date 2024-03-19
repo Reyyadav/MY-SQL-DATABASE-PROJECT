@@ -1,5 +1,5 @@
 
-# Lab Instructions: MySQL database project 
+# MySQL database project 
 
 ## Scenario 
 

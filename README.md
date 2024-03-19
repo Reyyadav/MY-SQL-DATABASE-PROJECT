@@ -234,6 +234,14 @@ CALL GetBookingsData ("2021-11-13");
 CALL GetBookingsData ("2021-11-13");
 
 ![Screenshot 2024-03-19 160746](https://github.com/Reyyadav/MY-SQL-DATABASE-PROJECT/assets/153619494/56257114-d45e-4c52-9eae-6ea3bd99611c)
+
+
+
+
+CERTIFICATE OF THE COURSE
+
+[LINK](https://coursera.org/share/1363d0497c61e087b7395eedfe612431)
+
     
 
 
